@@ -1,0 +1,17 @@
+.big{
+	font-size: 1.1em;
+	margin: 0.83em 0;
+	font-weight: bold;
+}
+
+.filter-button{
+	margin: 0.83em 0;
+}
+
+.product-page{
+	display: flex;
+}
+
+.product-page > .filter{
+	width: 300px;
+}
