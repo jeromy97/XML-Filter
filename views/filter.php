@@ -11,9 +11,9 @@
 </head>
 <body>
 	
-	<div class="product-page">
-		<div class="filter">
-			<form id="filter_form">
+	<form id="filter_form">
+		<div class="product-page">
+			<div class="filter">
 				
 				<div>
 					<div class="big">Prijs</div>
@@ -82,45 +82,53 @@
 						<?php endforeach ?>
 					</div>
 				<?php endif ?>
-				
-			</form>
-			<form id="reset_form"></form>
 			
-			<div>
-				<input type="submit" value="Filter" form="filter_form" class="filter-button">
-				<input type="submit" value="Reset filter" form="reset_form" class="filter-button">
+				<div>
+					<input type="submit" value="Filter" form="filter_form" class="filter-button">
+					<input type="submit" value="Reset filter" form="reset_form" class="filter-button">
+				</div>
+					
 			</div>
+			<div>
 				
+				<?php if (!empty($items)): ?>
+					
+					<p>
+						<select id="limit" name="limit">
+							<option value="5" <?= $limit == 5 ? 'selected' : '' ?>>5 items</option>
+							<option value="10" <?= $limit == 10 ? 'selected' : '' ?>>10 items</option>
+							<option value="50" <?= $limit == 50 ? 'selected' : '' ?>>50 items</option>
+							<option value="100" <?= $limit == 100 ? 'selected' : '' ?>>100 items</option>
+						</select>
+						<input type="submit" value="Limiteer">
+						<?= count($items) ?> van <?= $count ?> artikelen
+					</p>
+					
+					<ul>
+						<?php foreach ($items as $item): ?>
+							<li>
+								<h2><?= htmlspecialchars($item->title) ?></h2>
+								<ul>
+									<li>Merk: <?= htmlspecialchars(getProperties($item)->brand) ?></li>
+									<li>Producttype: <?= htmlspecialchars(getProperties($item)->product_type) ?></li>
+									<li>Conditie: <?= htmlspecialchars(getProperties($item)->condition) ?></li>
+									<li>Beschikbaarheid: <?= htmlspecialchars(getProperties($item)->availability) ?></li>
+									<li>Prijs: <?= htmlspecialchars(formatPrice(getProperties($item)->price)) ?></li>
+								</ul>
+							</li>
+						<?php endforeach ?>
+					</ul>
+				
+				<?php else: ?>
+					
+					<p>Er zijn geen artikelen gevonden.</p>
+				
+				<?php endif ?>
+				
+			</div>
 		</div>
-		<div>
-			
-			<?php if (!empty($items)): ?>
-				
-				<p><?= count($items) ?> artikelen</p>
-				
-				<ul>
-					<?php foreach ($items as $item): ?>
-						<li>
-							<h2><?= htmlspecialchars($item->title) ?></h2>
-							<ul>
-								<li>Merk: <?= htmlspecialchars(getProperties($item)->brand) ?></li>
-								<li>Producttype: <?= htmlspecialchars(getProperties($item)->product_type) ?></li>
-								<li>Conditie: <?= htmlspecialchars(getProperties($item)->condition) ?></li>
-								<li>Beschikbaarheid: <?= htmlspecialchars(getProperties($item)->availability) ?></li>
-								<li>Prijs: <?= htmlspecialchars(formatPrice(getProperties($item)->price)) ?></li>
-							</ul>
-						</li>
-					<?php endforeach ?>
-				</ul>
-			
-			<?php else: ?>
-				
-				<p>Er zijn geen artikelen gevonden.</p>
-			
-			<?php endif ?>
-			
-		</div>
-	</div>
+	</form>
+	<form id="reset_form"></form>
 	
 </body>
 </html>

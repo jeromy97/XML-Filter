@@ -72,6 +72,15 @@ sort($filterOptions['product_type']);
 sort($filterOptions['condition']);
 sort($filterOptions['availability']);
 
+// Count items
+
+$count = count($items);
+
+// Limit items
+
+$limit = $_GET['limit'] ?? 10;
+$items = array_slice($items, 0, $limit);
+
 // Unset variables not used in view
 
 unset($filter);
