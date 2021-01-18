@@ -104,6 +104,10 @@
 						<?= count($items) ?> van <?= $count ?> artikelen
 					</p>
 					
+					<p>
+						<?php include 'views/pagination.php'; ?>
+					</p>
+					
 					<ul>
 						<?php foreach ($items as $item): ?>
 							<li>
@@ -118,6 +122,10 @@
 							</li>
 						<?php endforeach ?>
 					</ul>
+					
+					<p>
+						<?php include 'views/pagination.php'; ?>
+					</p>
 				
 				<?php else: ?>
 					

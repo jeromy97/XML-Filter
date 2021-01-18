@@ -78,8 +78,10 @@ $count = count($items);
 
 // Limit items
 
-$limit = $_GET['limit'] ?? 10;
-$items = array_slice($items, 0, $limit);
+$limit = isset($_GET['limit']) ? (int) $_GET['limit'] : 10;
+$page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
+$offset = ( $page * $limit ) - $limit;
+$items = array_slice($items, $offset, $limit);
 
 // Unset variables not used in view
 
